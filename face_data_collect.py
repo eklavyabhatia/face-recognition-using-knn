@@ -17,6 +17,7 @@ cap = cv2.VideoCapture(0)
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
 
 skip = 0
+colected_images = 0
 
 person_name = input()
 face_data = []
@@ -57,9 +58,11 @@ while True:
             crop_face = cv2.resize(crop_face, (100, 100))
             crop_face_flatten = np.reshape(crop_face, (-1,))
             face_data.append(crop_face_flatten)
-
+            colected_images = colected_images+1
     skip = skip+1
 
+    if colected_images == 20:
+        break
     key_pressed = cv2.waitKey(1) & 0xFF
     if key_pressed == ord('q'):
         break
